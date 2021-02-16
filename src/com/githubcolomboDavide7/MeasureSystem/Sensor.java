@@ -16,4 +16,9 @@ public abstract class Sensor {
     // Abstract method that returns a double value acquired by the SPECIFIC sensor
     public abstract double getSensorValue();
 
+    // Instance method that returns the sensorID value
+    public int getSensorID(){
+        return this.sensorID;
+    }
+
 }

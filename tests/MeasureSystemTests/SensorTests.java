@@ -11,6 +11,7 @@ public class SensorTests {
     public void shouldReturnTemperatureValue(){
         Sensor tempSensor = new TemperatureSensor();
         System.out.println(tempSensor.getSensorValue());
+        System.out.println(tempSensor.getSensorID());
         Assert.assertTrue(true);
     }
 
