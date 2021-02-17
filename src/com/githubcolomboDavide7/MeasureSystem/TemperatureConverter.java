@@ -2,27 +2,24 @@ package com.githubcolomboDavide7.MeasureSystem;
 
 public class TemperatureConverter implements IConverter {
 
-    private UnitMeasure from;
-    private UnitMeasure to;
+    private ConversionType type;
 
-    public TemperatureConverter(UnitMeasure from, UnitMeasure to) {
-        this.from = from;
-        this.to = to;
+    public TemperatureConverter(ConversionType type) {
+        this.type = type;
     }
 
-    // Sistemare
     @Override
     public double convertValue(double value) throws ConversionException {
-        if((this.from != UnitMeasure.Celsius &&
-           this.from != UnitMeasure.Fahrenheit) ||
-                (this.to != UnitMeasure.Celsius &&
-           this.to != UnitMeasure.Fahrenheit))
-            throw new ConversionException("The from or to unit measure is illegal for this type of converter");
-
-        if(this.from == UnitMeasure.Celsius)
-            return fromCelsiusToFahrenheit(value);
-        else
-            return fromFahrenheitToCelsius(value);
+        switch(this.type){
+            case FROM_CELSIUS_TO_FAHRENHEIT:
+                return fromCelsiusToFahrenheit(value);
+            case FROM_FAHRENHEIT_TO_CELSIUS:
+                return fromFahrenheitToCelsius(value);
+            default:
+                throw new ConversionException("Conversion type: '"+
+                                              this.type +
+                                              "' is invalid for TemperatureConverter!!!");
+        }
     }
 
     private double fromCelsiusToFahrenheit(double value){

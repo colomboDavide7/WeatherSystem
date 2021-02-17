@@ -8,4 +8,9 @@ public class TemperatureSensor extends Sensor {
         return  0 + 15*Math.random();
     }
 
+    @Override
+    public IConverter getDefaultConverter() {
+        return new TemperatureConverter(ConversionType.FROM_CELSIUS_TO_FAHRENHEIT);
+    }
+
 }
