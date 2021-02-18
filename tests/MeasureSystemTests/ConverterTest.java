@@ -56,5 +56,28 @@ public class ConverterTest {
         Assert.assertTrue(expecetedValue == actualValue);
     }
 
-    
+    @Test
+    public void shouldNotConvertIfInvalidMeasureUnit() {
+        double celsiusValue  = 15;
+        try {
+            new TemperatureConverter().convertValue(MeasureUnit.Celsius, MeasureUnit.Pascal, celsiusValue);
+            Assert.assertTrue(false);       // if this line is executed, then there's an error!
+        }catch(ConversionException ex){
+            Assert.assertTrue(true);
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @Test
+    public void shouldNotConverFromXToXIfInvalidMeasureUnit(){
+        double pascalValue = 300;
+        try{
+            new TemperatureConverter().convertValue(MeasureUnit.Pascal, MeasureUnit.Pascal, pascalValue);
+            Assert.assertTrue(false);       // if this line is executed, then there's an error!
+        }catch(ConversionException ex){
+            Assert.assertTrue(true);
+            System.out.println(ex.getMessage());
+        }
+    }
+
 }

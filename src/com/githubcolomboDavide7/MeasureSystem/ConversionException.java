@@ -3,7 +3,9 @@ package com.githubcolomboDavide7.MeasureSystem;
 public class ConversionException extends Exception {
 
     public enum ErrorCode{
-        ILLEGAL_CONVERSION, UNDEFINED_ERROR_CODE;
+        INVALID_CONVERSION,
+        INVALID_MEASURE_UNIT,
+        UNDEFINED_ERROR_CODE;
     }
 
     private String msg;
@@ -25,7 +27,8 @@ public class ConversionException extends Exception {
     }
 
     public String getMessage(){
-        return this.msg;
+        return "Error code '" + this.errorCode + "' is occurred.\n" +
+                "Message: " + this.msg;
     }
 
 }
