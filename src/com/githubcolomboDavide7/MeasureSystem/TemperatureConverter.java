@@ -2,28 +2,43 @@ package com.githubcolomboDavide7.MeasureSystem;
 
 public class TemperatureConverter implements IConverter {
 
-    private MeasureUnit from;
-    private MeasureUnit to;
+// =====================================================================================================================
+    // Enum that defines conversion type
+    private enum ConversionType{
+        FROM_CELSIUS_TO_FAHRENHEIT(MeasureUnit.Celsius, MeasureUnit.Fahrenheit),
+        FROM_FAHRENHEIT_TO_CELSIUS(MeasureUnit.Fahrenheit, MeasureUnit.Celsius);
 
-    public TemperatureConverter(MeasureUnit from, MeasureUnit to) {
-        this.from = from;
-        this.to   = to;
+        private MeasureUnit from;
+        private MeasureUnit to;
+
+        ConversionType(MeasureUnit from, MeasureUnit to){
+            this.from = from;
+            this.to   = to;
+        }
+
+        static ConversionType getConversionType(MeasureUnit from, MeasureUnit to) throws ConversionException {
+            for(ConversionType v : ConversionType.values())
+                if(v.from == from && v.to == to)
+                    return v;
+            throw new ConversionException();
+        }
+
     }
+// =====================================================================================================================
 
     @Override
-    public double convertValue(double value) throws ConversionException {
-        if(!MeasureUnit.isValidTempMeasureUnit(this.from) ||
-           !MeasureUnit.isValidTempMeasureUnit(this.to))
-            throw new ConversionException("Invalid 'from' or 'to' measure unit for temperature converter...\n" +
-                                          "FROM = " + this.from +
-                                          "TO   = " + this.to + "\n");
-
-        if(this.from == MeasureUnit.Celsius && this.to == MeasureUnit.Fahrenheit)
-            return fromCelsiusToFahrenheit(value);
-        else if(this.from == MeasureUnit.Fahrenheit && this.to == MeasureUnit.Celsius)
-            return fromFahrenheitToCelsius(value);
-        else
+    public double convertValue(MeasureUnit from, MeasureUnit to, double value) throws ConversionException{
+        if(from == to)
             return value;
+
+        switch(ConversionType.getConversionType(from, to)){
+            case FROM_CELSIUS_TO_FAHRENHEIT:
+                return fromCelsiusToFahrenheit(value);
+            case FROM_FAHRENHEIT_TO_CELSIUS:
+                return fromFahrenheitToCelsius(value);
+            default:
+                return -1;
+        }
     }
 
     private double fromCelsiusToFahrenheit(double value){

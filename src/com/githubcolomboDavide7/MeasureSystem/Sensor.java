@@ -7,8 +7,6 @@ public abstract class Sensor {
 
     // Instance variables
     private int sensorID;
-    protected MeasureUnit defaultUnit;
-    protected MeasureUnit requiredUnit;
 
     // Public Constructor
     public Sensor(){
@@ -17,8 +15,6 @@ public abstract class Sensor {
 
     // Abstract method that returns a double value acquired by the SPECIFIC sensor
     public abstract double getSensorValue();
-
-    public abstract void setRequiredUnit(MeasureUnit unit);
 
     // Instance method that returns the sensorID value
     public int getSensorID(){
