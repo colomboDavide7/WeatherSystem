@@ -1,7 +1,6 @@
 package MeasureSystemTests;
 
-import com.githubcolomboDavide7.MeasureSystem.MeasureUnit;
-import com.githubcolomboDavide7.MeasureSystem.Sensor;
+import com.githubcolomboDavide7.MeasureSystem.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -21,6 +20,24 @@ public class SensorTests {
         int to = 70;
         int value = (int) Sensor.PM10Sensor(MeasureUnit.microg_per_m3, from, to).getValue();
         Assert.assertTrue(value >= from && value <= to);
+    }
+
+    @Test
+    public void shouldChangeSensorUnitAndRangeTest() throws ConversionException {
+        int from = -10;
+        int to   = 10;
+        Sensor tempSensor = Sensor.TempSensor(MeasureUnit.Celsius, from, to);
+        int value = (int) tempSensor.getValue();
+        Assert.assertTrue(value >= from && value <= to);
+        System.out.println(tempSensor.toString());
+
+        // Change measure unit
+        tempSensor.changeUnit(MeasureUnit.Fahrenheit);
+        int changedValue = (int) tempSensor.getValue();
+        int changedFrom = (int) new TemperatureConverter().convertValue(MeasureUnit.Celsius, MeasureUnit.Fahrenheit, from);
+        int changedTo   = (int) new TemperatureConverter().convertValue(MeasureUnit.Celsius, MeasureUnit.Fahrenheit, to);
+        Assert.assertTrue( changedValue >= changedFrom && changedValue <= changedTo);
+        System.out.println(tempSensor.toString());
     }
 
 }
