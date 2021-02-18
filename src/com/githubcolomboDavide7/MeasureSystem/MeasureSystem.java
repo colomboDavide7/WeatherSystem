@@ -14,7 +14,7 @@ public class MeasureSystem {
     public List<Double> acquireFromSensors(){
         List<Double> values = new ArrayList<>(this.sensorList.size());
         for(Sensor s : sensorList)
-            values.add(s.getSensorValue());
+            values.add(s.getValue());
         return values;
     }
 

@@ -1,27 +1,40 @@
 package com.githubcolomboDavide7.MeasureSystem;
 
-public abstract class Sensor {
+public class Sensor {
 
-    // Class variables
-    private static int ID = 0;
-
-    // Instance variables
-    protected int sensorID;
-    protected MeasureUnit defaultUnit;
-
-    // Public Constructor
-    public Sensor(MeasureUnit defaultUnit){
-        this.sensorID = Sensor.ID++;
-        this.defaultUnit = defaultUnit;
+// =======================================================================================
+    public static Sensor PM10Sensor(MeasureUnit unit, int from, int to){
+        return new Sensor(unit, from, to);
     }
 
-    // Abstract method that returns a double value acquired by the SPECIFIC sensor
-    public abstract double getSensorValue();
+    public static Sensor TempSensor(MeasureUnit unit, int from, int to){
+        return new Sensor(unit, from, to);
+    }
+
+// =======================================================================================
+    private static int ID = 0;
+
+    protected int sensorID;
+    protected MeasureUnit defaultUnit;
+    private int from;
+    private int to;
+
+    private Sensor(MeasureUnit defaultUnit, int from, int to){
+        this.sensorID = Sensor.ID++;
+        this.defaultUnit = defaultUnit;
+        this.from = from;
+        this.to = to;
+    }
+
+    public double getValue(){
+        return from + (to - from)*Math.random();
+    }
 
     @Override
     public String toString(){
         return  "Sensor ID: " + this.sensorID + "\n" +
-                "Default unit: " + this.defaultUnit + "\n";
+                "Default unit: " + this.defaultUnit + "\n" +
+                "Range goes from: " + this.from + " to " + this.to + "\n";
     }
 
 }
