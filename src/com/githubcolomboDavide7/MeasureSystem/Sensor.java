@@ -37,6 +37,18 @@ public class Sensor {
         return from + (to - from)*Math.random();
     }
 
+    private String[] getArgsArray(){
+        String[] args = new String[2];
+        args[0] = String.valueOf(getValue());
+        args[1] = this.currentUnit.toString();
+        return args;
+    }
+
+    public String getDataRecord(){
+        String[] args = getArgsArray();
+        return SensorData.getSensorData(args);
+    }
+
     public void changeUnit(MeasureUnit newUnit){
         if(converter == null)
             return;

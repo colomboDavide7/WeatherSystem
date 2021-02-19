@@ -12,6 +12,4 @@ public enum FormatterScheme {
         this.tokenSeparator    = tokenSeparator;
     }
 
-
-
 }
