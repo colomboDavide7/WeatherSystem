@@ -1,25 +1,32 @@
 package com.githubcolomboDavide7.MeasureSystem;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MeasureSystem {
 
-    private final List<Sensor> sensorList;
+    // The sensor object who generates data
+    private Sensor sensor;
+    private MeasureUnit selectedUnit;
 
-    public MeasureSystem(List<Sensor> sensorList){
-        this.sensorList = sensorList;
+    public MeasureSystem(Sensor s, MeasureUnit unit){
+        this.sensor = s;
+        this.selectedUnit = unit;
     }
 
-    public List<Double> acquireFromSensors(){
-        List<Double> values = new ArrayList<>(this.sensorList.size());
-        for(Sensor s : sensorList)
-            values.add(s.getValue());
-        return values;
+    public String getDataRecord(){
+        return "";
     }
 
-    public void addSensor(Sensor toAdd){
-        this.sensorList.add(toAdd);
+    public void changeUnit(MeasureUnit newUnit){
+        try {
+            IConverter c = ConverterFactory.getConverter(this.selectedUnit);
+            this.sensor.changeUnit(c, this.selectedUnit, newUnit);
+            this.selectedUnit = newUnit;
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public boolean isMeasureUnitEqual(MeasureUnit toCheck){
+        return this.selectedUnit.equals(toCheck);
     }
 
 }

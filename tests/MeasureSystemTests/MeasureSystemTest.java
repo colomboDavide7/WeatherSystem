@@ -2,27 +2,41 @@ package MeasureSystemTests;
 
 import com.githubcolomboDavide7.MeasureSystem.*;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MeasureSystemTest {
 
-    private List<Sensor> sensorList;
-    @Before
-    public void initializeSensorList(){
-        this.sensorList = new ArrayList<>(2);
-        sensorList.add(Sensor.TempSensor(MeasureUnit.Celsius, 0, 15));
-        sensorList.add(Sensor.PM10Sensor(MeasureUnit.microg_per_m3, 20, 70));
+    @Test
+    public void shouldAcquireValuesTest(){
+        MeasureUnit unit = MeasureUnit.Celsius;
+        int from = 10;
+        int to = 30;
+        MeasureSystem sys = new MeasureSystem(Sensor.TempSensor(from, to), unit);
+        String dataRecord = sys.getDataRecord();
+        String expectedDataRecord = "";
+        Assert.assertEquals(expectedDataRecord, dataRecord);
     }
 
     @Test
-    public void shouldAcquireValuesTest(){
-        MeasureSystem sys = new MeasureSystem(this.sensorList);
-        List<Double> values = sys.acquireFromSensors();
-        Assert.assertTrue(values.size() == 2);
+    public void shouldTestChangeUnitMethod(){
+        MeasureUnit unit = MeasureUnit.Celsius;
+        int from = 10;
+        int to = 30;
+        MeasureSystem sys = new MeasureSystem(Sensor.TempSensor(from, to), unit);
+        Assert.assertTrue(sys.isMeasureUnitEqual(MeasureUnit.Celsius));
+        sys.changeUnit(MeasureUnit.Fahrenheit);
+        Assert.assertTrue(sys.isMeasureUnitEqual(MeasureUnit.Fahrenheit));
+    }
+
+    @Test
+    public void shouldTestChangeUnitMethodException(){
+        MeasureUnit unit = MeasureUnit.Celsius;
+        int from = 10;
+        int to = 30;
+        MeasureSystem sys = new MeasureSystem(Sensor.TempSensor(from, to), unit);
+        Assert.assertTrue(sys.isMeasureUnitEqual(MeasureUnit.Celsius));
+        sys.changeUnit(MeasureUnit.Pascal);
+        Assert.assertTrue(sys.isMeasureUnitEqual(MeasureUnit.Celsius));
     }
 
 }

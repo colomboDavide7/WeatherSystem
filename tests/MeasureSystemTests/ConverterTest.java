@@ -80,4 +80,23 @@ public class ConverterTest {
         }
     }
 
+    @Test
+    public void shouldTestConverterFactory() throws Exception {
+        IConverter c1 = ConverterFactory.getConverter(MeasureUnit.Celsius);
+        IConverter c2 = ConverterFactory.getConverter(MeasureUnit.Fahrenheit);
+        Assert.assertTrue((c1 instanceof TemperatureConverter)
+                                && (c2 instanceof TemperatureConverter)
+        );
+    }
+
+    @Test
+    public void shouldNotChangeUnitWhenConverterDoesNotExist(){
+        try {
+            IConverter c = ConverterFactory.getConverter(MeasureUnit.microg_per_m3);
+            Assert.assertTrue(false);
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }

@@ -22,11 +22,12 @@ public class FormatterTest {
         Assert.assertEquals(expectedData, formattedData);
     }
 
+    /*
     @Test
     public void shouldTestSensorDataFormatting(){
         Sensor s = Sensor.TempSensor(MeasureUnit.Celsius, 10, 30);
         String dataRecord = s.getDataRecord();
         System.out.println(dataRecord);
-    }
+    }*/
 
 }
