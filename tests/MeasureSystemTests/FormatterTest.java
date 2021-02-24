@@ -3,7 +3,6 @@ package MeasureSystemTests;
 import com.githubcolomboDavide7.MeasureSystem.DataFormatter;
 import com.githubcolomboDavide7.MeasureSystem.FormatterScheme;
 import com.githubcolomboDavide7.MeasureSystem.MeasureUnit;
-import com.githubcolomboDavide7.MeasureSystem.Sensor;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -2,41 +2,40 @@ package MeasureSystemTests;
 
 import com.githubcolomboDavide7.MeasureSystem.*;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class MeasureSystemTest {
 
-    @Test
-    public void shouldAcquireValuesTest(){
+    private MeasureSystem sys;
+
+    @Before
+    public void setUpMeasureSystem(){
         MeasureUnit unit = MeasureUnit.Celsius;
         int from = 10;
         int to = 30;
-        MeasureSystem sys = new MeasureSystem(Sensor.TempSensor(from, to), unit);
-        String dataRecord = sys.getDataRecord();
+        this.sys = new MeasureSystem(unit, from, to);
+    }
+
+    @Test
+    public void shouldAcquireValuesTest(){
+        String dataRecord = this.sys.getDataRecord();
         String expectedDataRecord = "";
         Assert.assertEquals(expectedDataRecord, dataRecord);
     }
 
     @Test
     public void shouldTestChangeUnitMethod(){
-        MeasureUnit unit = MeasureUnit.Celsius;
-        int from = 10;
-        int to = 30;
-        MeasureSystem sys = new MeasureSystem(Sensor.TempSensor(from, to), unit);
-        Assert.assertTrue(sys.isMeasureUnitEqual(MeasureUnit.Celsius));
+        Assert.assertTrue(this.sys.isMeasureUnitEqual(MeasureUnit.Celsius));
         sys.changeUnit(MeasureUnit.Fahrenheit);
-        Assert.assertTrue(sys.isMeasureUnitEqual(MeasureUnit.Fahrenheit));
+        Assert.assertTrue(this.sys.isMeasureUnitEqual(MeasureUnit.Fahrenheit));
     }
 
     @Test
     public void shouldTestChangeUnitMethodException(){
-        MeasureUnit unit = MeasureUnit.Celsius;
-        int from = 10;
-        int to = 30;
-        MeasureSystem sys = new MeasureSystem(Sensor.TempSensor(from, to), unit);
-        Assert.assertTrue(sys.isMeasureUnitEqual(MeasureUnit.Celsius));
+        Assert.assertTrue(this.sys.isMeasureUnitEqual(MeasureUnit.Celsius));
         sys.changeUnit(MeasureUnit.Pascal);
-        Assert.assertTrue(sys.isMeasureUnitEqual(MeasureUnit.Celsius));
+        Assert.assertTrue(this.sys.isMeasureUnitEqual(MeasureUnit.Celsius));
     }
 
 }

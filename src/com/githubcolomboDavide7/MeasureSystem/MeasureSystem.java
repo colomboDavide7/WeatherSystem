@@ -2,13 +2,18 @@ package com.githubcolomboDavide7.MeasureSystem;
 
 public class MeasureSystem {
 
-    // The sensor object who generates data
-    private Sensor sensor;
     private MeasureUnit selectedUnit;
+    private int from;
+    private int to;
 
-    public MeasureSystem(Sensor s, MeasureUnit unit){
-        this.sensor = s;
+    public MeasureSystem(MeasureUnit unit, int from, int to){
         this.selectedUnit = unit;
+        this.from = from;
+        this.to = to;
+    }
+
+    public double getValue(){
+        return from + (to - from)*Math.random();
     }
 
     public String getDataRecord(){
@@ -18,7 +23,8 @@ public class MeasureSystem {
     public void changeUnit(MeasureUnit newUnit){
         try {
             IConverter c = ConverterFactory.getConverter(this.selectedUnit);
-            this.sensor.changeUnit(c, this.selectedUnit, newUnit);
+            this.from = (int) c.convertValue(this.selectedUnit, newUnit, this.from);
+            this.to   = (int) c.convertValue(this.selectedUnit, newUnit, this.to);
             this.selectedUnit = newUnit;
         } catch(Exception e) {
             System.out.println(e.getMessage());
