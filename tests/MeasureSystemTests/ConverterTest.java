@@ -6,12 +6,6 @@ import org.junit.Test;
 
 public class ConverterTest {
 
-    @Test
-    public void shouldTestCompatibleMeasureUnit(){
-        Assert.assertTrue(MeasureUnit.areCompatible(MeasureUnit.Fahrenheit, MeasureUnit.Celsius));
-        Assert.assertFalse(MeasureUnit.areCompatible(MeasureUnit.Celsius, MeasureUnit.mmHg));
-    }
-
     @Test (expected = Exception.class)
     public void shouldThrowExceptionIfNotCombatibleUnits() throws Exception {
         MeasureUnit fromUnit = MeasureUnit.Celsius;
