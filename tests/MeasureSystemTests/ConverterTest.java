@@ -7,95 +7,28 @@ import org.junit.Test;
 public class ConverterTest {
 
     @Test
-    public void shouldConvertCelsiusToFahrenheit() throws ConversionException {
-        double celsiusValue  = 0;
-        double expectedValue = 32;
-        double actualValue   = new TemperatureConverter().convertValue(
-                MeasureUnit.Celsius, MeasureUnit.Fahrenheit, celsiusValue
-        );
-        // 0 °C == 32 °F
-        Assert.assertTrue(expectedValue == actualValue);
+    public void shouldTestCompatibleMeasureUnit(){
+        Assert.assertTrue(MeasureUnit.areCompatible(MeasureUnit.Fahrenheit, MeasureUnit.Celsius));
+        Assert.assertFalse(MeasureUnit.areCompatible(MeasureUnit.Celsius, MeasureUnit.mmHg));
+    }
 
-        celsiusValue  = 9;
-        expectedValue = 48.20;
-        actualValue   = new TemperatureConverter().convertValue(
-                MeasureUnit.Celsius, MeasureUnit.Fahrenheit, celsiusValue
-        );
-        // 9 °C == 48.20 °F
-        Assert.assertTrue(expectedValue == actualValue);
+    @Test (expected = Exception.class)
+    public void shouldThrowExceptionIfNotCombatibleUnits() throws Exception {
+        MeasureUnit fromUnit = MeasureUnit.Celsius;
+        MeasureUnit toUnit   = MeasureUnit.mmHg;
+        double value = Converter.convertValue(fromUnit, toUnit, 0);
     }
 
     @Test
-    public void shouldConvertFromFahrenheitToCelsius() throws ConversionException {
-        double fahrenheitValue  = 32;
-        double expectedValue = 0;
-        double actualValue   = new TemperatureConverter().convertValue(
-                MeasureUnit.Fahrenheit, MeasureUnit.Celsius, fahrenheitValue
-        );
-        // 32 °F == 0 °C
-        Assert.assertTrue(expectedValue == actualValue);
-
-        fahrenheitValue  = 131;
-        expectedValue = 55;
-        actualValue   = new TemperatureConverter().convertValue(
-                MeasureUnit.Fahrenheit, MeasureUnit.Celsius, fahrenheitValue
-        );
-        // 131 °F == 55 °C
-        Assert.assertTrue(expectedValue == actualValue);
-    }
-
-    @Test
-    public void shouldConvertFromXToX() throws ConversionException {
-        double celsiusValue = 15;
-        double expecetedValue = 15;
-        double actualValue = new TemperatureConverter().convertValue(
-                MeasureUnit.Celsius, MeasureUnit.Celsius, celsiusValue
-        );
-
-        // 15 °C == 15 °C
-        Assert.assertTrue(expecetedValue == actualValue);
-    }
-
-    @Test
-    public void shouldNotConvertIfInvalidMeasureUnit() {
-        double celsiusValue  = 15;
+    public void shouldConvertValueFromCelsiusToFahrenheit(){
         try {
-            new TemperatureConverter().convertValue(MeasureUnit.Celsius, MeasureUnit.Pascal, celsiusValue);
-            Assert.assertTrue(false);       // if this line is executed, then there's an error!
-        }catch(ConversionException ex){
-            Assert.assertTrue(true);
-            System.out.println(ex.getMessage());
-        }
-    }
-
-    @Test
-    public void shouldNotConverFromXToXIfInvalidMeasureUnit(){
-        double pascalValue = 300;
-        try{
-            new TemperatureConverter().convertValue(MeasureUnit.Pascal, MeasureUnit.Pascal, pascalValue);
-            Assert.assertTrue(false);       // if this line is executed, then there's an error!
-        }catch(ConversionException ex){
-            Assert.assertTrue(true);
-            System.out.println(ex.getMessage());
-        }
-    }
-
-    @Test
-    public void shouldTestConverterFactory() throws Exception {
-        IConverter c1 = ConverterFactory.getConverter(MeasureUnit.Celsius);
-        IConverter c2 = ConverterFactory.getConverter(MeasureUnit.Fahrenheit);
-        Assert.assertTrue((c1 instanceof TemperatureConverter)
-                                && (c2 instanceof TemperatureConverter)
-        );
-    }
-
-    @Test
-    public void shouldNotChangeUnitWhenConverterDoesNotExist(){
-        try {
-            IConverter c = ConverterFactory.getConverter(MeasureUnit.microg_per_m3);
-            Assert.assertTrue(false);
+            MeasureUnit fromUnit = MeasureUnit.Celsius;
+            MeasureUnit toUnit   = MeasureUnit.Fahrenheit;
+            double expectedValue = 32;
+            double actualValue = Converter.convertValue(fromUnit, toUnit, 0);
+            Assert.assertTrue(expectedValue == actualValue);
         } catch(Exception e) {
-            System.out.println(e.getMessage());
+            Assert.assertTrue(false);
         }
     }
 

@@ -22,9 +22,8 @@ public class MeasureSystem {
 
     public void changeUnit(MeasureUnit newUnit){
         try {
-            IConverter c = ConverterFactory.getConverter(this.selectedUnit);
-            this.from = (int) c.convertValue(this.selectedUnit, newUnit, this.from);
-            this.to   = (int) c.convertValue(this.selectedUnit, newUnit, this.to);
+            this.from = (int) Converter.convertValue(this.selectedUnit, newUnit, this.from);
+            this.to   = (int) Converter.convertValue(this.selectedUnit, newUnit, this.to);
             this.selectedUnit = newUnit;
         } catch(Exception e) {
             System.out.println(e.getMessage());

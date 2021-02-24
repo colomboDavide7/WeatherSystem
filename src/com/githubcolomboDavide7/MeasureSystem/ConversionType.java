@@ -13,7 +13,7 @@ public enum ConversionType {
         this.to   = to;
     }
 
-    static ConversionType getConversionType(MeasureUnit from, MeasureUnit to) throws ConversionException{
+    protected static ConversionType getConversionType(MeasureUnit from, MeasureUnit to) throws ConversionException{
         for(ConversionType v : ConversionType.values())
             if(v.from == from && v.to == to)
                 return v;
