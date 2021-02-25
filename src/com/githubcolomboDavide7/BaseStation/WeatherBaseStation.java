@@ -1,6 +1,8 @@
 package com.githubcolomboDavide7.BaseStation;
 
 import com.githubcolomboDavide7.MeasureSystem.*;
+import com.githubcolomboDavide7.Printer.WBSPrinter;
+
 import java.util.*;
 
 public class WeatherBaseStation {
@@ -42,10 +44,7 @@ public class WeatherBaseStation {
     }
 
     public String printActiveMeasureSystems(){
-        StringBuilder sb = new StringBuilder();
-        for(IMeasureSystem ms : this.measureSystems)
-            sb.append(ms.toString()).append("\n");
-        return sb.toString();
+        return WBSPrinter.printActiveMeasureSystems(this.measureSystems);
     }
 
 }
