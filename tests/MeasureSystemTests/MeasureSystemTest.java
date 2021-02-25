@@ -11,10 +11,10 @@ public class MeasureSystemTest {
 
     @Before
     public void setUpMeasureSystem(){
-        MeasureUnit unit = MeasureUnit.Celsius;
+        MeasureSystemType type = MeasureSystemType.TEMPERATURE;
         int from = 10;
         int to = 30;
-        this.sys = new MeasureSystem(unit, from, to);
+        this.sys = new MeasureSystem(type, from, to);
     }
 
     @Test

@@ -19,13 +19,13 @@ public class WeatherBaseStation {
 
     private boolean alreadyExistsCompatibleMeasureSystem(IMeasureSystem toCheck){
         for(IMeasureSystem ms : this.measureSystems)
-            if(ms.isCompatibleUnit((MeasureSystem) toCheck))
+            if(ms.isSystemOfSameType((MeasureSystem) toCheck))
                 return true;
             return false;
     }
 
-    public void removeMeasureSystem(int index){
-        this.measureSystems.remove(index);
+    public void removeMeasureSystem(MeasureSystemType typeToRemove){
+        this.measureSystems.removeIf(ms -> ms.isSameType(typeToRemove));
     }
 
     public boolean isNumberOfMeasureSystemEqualTo(int size){
