@@ -8,6 +8,4 @@ public interface IMeasureSystem {
 
     boolean isSystemOfSameType(MeasureSystem measureSystem);
 
-    boolean isSameType(MeasureSystemType type);
-
 }

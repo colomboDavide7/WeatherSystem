@@ -56,13 +56,19 @@ public class BaseStationTest {
         System.out.println(sb.toString());
 
         // Remove ms at index 0
-        wbs.removeMeasureSystem(MeasureSystemType.TEMPERATURE);
+        wbs.removeMeasureSystem(this.ms1);
         Assert.assertTrue(wbs.isNumberOfMeasureSystemEqualTo(1));
         activeMS = wbs.printActiveMeasureSystems();
         sb = new StringBuilder();
         sb.append(ms2.toString()).append("\n");
         Assert.assertEquals(sb.toString(), activeMS);
         System.out.println(sb.toString());
+    }
+
+    @Test (expected = Exception.class)
+    public void shouldTestRemoveWithoutThatSystem() throws Exception {
+        this.wbs.addMeasureSystem(ms1);
+        this.wbs.removeMeasureSystem(this.ms2);
     }
 
 

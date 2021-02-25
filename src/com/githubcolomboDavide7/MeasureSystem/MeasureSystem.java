@@ -34,11 +34,6 @@ public class MeasureSystem implements IMeasureSystem {
     }
 
     @Override
-    public boolean isSameType(MeasureSystemType type) {
-        return this.type.equals(type);
-    }
-
-    @Override
     public String toString(){
         return "SYSTEM TYPE = " + this.type + "\t" +
                 "MEASURE_UNIT = " + this.type.defaultUnit + "\t" +

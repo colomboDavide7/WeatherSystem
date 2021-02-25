@@ -17,15 +17,17 @@ public class WeatherBaseStation {
         this.measureSystems.add(ms);
     }
 
+    public void removeMeasureSystem(IMeasureSystem toRemove) throws Exception {
+        if(!alreadyExistsCompatibleMeasureSystem(toRemove))
+            throw new Exception("");
+        this.measureSystems.removeIf(ms -> ms.isSystemOfSameType((MeasureSystem) toRemove));
+    }
+
     private boolean alreadyExistsCompatibleMeasureSystem(IMeasureSystem toCheck){
         for(IMeasureSystem ms : this.measureSystems)
             if(ms.isSystemOfSameType((MeasureSystem) toCheck))
                 return true;
-            return false;
-    }
-
-    public void removeMeasureSystem(MeasureSystemType typeToRemove){
-        this.measureSystems.removeIf(ms -> ms.isSameType(typeToRemove));
+        return false;
     }
 
     public boolean isNumberOfMeasureSystemEqualTo(int size){
