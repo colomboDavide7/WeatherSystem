@@ -18,13 +18,6 @@ public class MeasureSystemTest {
     }
 
     @Test
-    public void shouldAcquireValuesTest(){
-        String dataRecord = this.sys.getDataRecord();
-        String expectedDataRecord = "";
-        Assert.assertEquals(expectedDataRecord, dataRecord);
-    }
-
-    @Test
     public void shouldTestChangeUnitMethod(){
         Assert.assertTrue(this.sys.isMeasureUnitEqual(MeasureUnit.Celsius));
         sys.changeUnit(MeasureUnit.Fahrenheit);

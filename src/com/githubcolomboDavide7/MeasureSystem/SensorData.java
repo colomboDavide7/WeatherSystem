@@ -14,7 +14,8 @@ public class SensorData {
     }
 
     public static String getSensorData(String[] args){
-        return DataFormatter.formatData(keys, args, FormatterScheme.SensorData);
+        return "";
+                //DataFormatter.formatData(keys, args, FormatterScheme.SensorData);
     }
 
 }

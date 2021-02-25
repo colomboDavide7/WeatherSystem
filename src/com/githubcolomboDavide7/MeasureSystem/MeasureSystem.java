@@ -1,6 +1,6 @@
 package com.githubcolomboDavide7.MeasureSystem;
 
-public class MeasureSystem {
+public class MeasureSystem implements IMeasureSystem {
 
     private MeasureUnit selectedUnit;
     private int from;
@@ -12,26 +12,26 @@ public class MeasureSystem {
         this.to = to;
     }
 
-    public double getValue(){
-        return from + (to - from)*Math.random();
-    }
-
-    public String getDataRecord(){
-        return "";
-    }
-
-    public void changeUnit(MeasureUnit newUnit){
+    @Override
+    public void changeUnit(MeasureUnit unit){
         try {
-            this.from = (int) Converter.convertValue(this.selectedUnit, newUnit, this.from);
-            this.to   = (int) Converter.convertValue(this.selectedUnit, newUnit, this.to);
-            this.selectedUnit = newUnit;
+            this.from = (int) Converter.convertValue(this.selectedUnit, unit, this.from);
+            this.to   = (int) Converter.convertValue(this.selectedUnit, unit, this.to);
+            this.selectedUnit = unit;
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
-    public boolean isMeasureUnitEqual(MeasureUnit toCheck){
-        return this.selectedUnit.equals(toCheck);
+    @Override
+    public double getValue(){
+        return from + (to - from)*Math.random();
+    }
+
+// ==========================================================================================
+    // These methods are called for testing
+    public boolean isMeasureUnitEqual(MeasureUnit unit) {
+        return this.selectedUnit.equals(unit);
     }
 
 }
