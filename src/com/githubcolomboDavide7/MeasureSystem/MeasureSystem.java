@@ -1,5 +1,8 @@
 package com.githubcolomboDavide7.MeasureSystem;
 
+import com.githubcolomboDavide7.Converter.ConverterFactory;
+import com.githubcolomboDavide7.Converter.IConverter;
+
 public class MeasureSystem implements IMeasureSystem {
 
     private final MeasureSystemInfo info;
@@ -15,8 +18,9 @@ public class MeasureSystem implements IMeasureSystem {
     @Override
     public void changeUnit(MeasureUnit unit){
         try {
-            this.from = (int) Converter.convertValue(this.info.getSelectedMeasureUnit(), unit, this.from);
-            this.to   = (int) Converter.convertValue(this.info.getSelectedMeasureUnit(), unit, this.to);
+            IConverter myConverter = ConverterFactory.getConverter(this.info.getSelectedMeasureUnit(), unit);
+            this.from = (int) myConverter.convertValue(this.from);
+            this.to   = (int) myConverter.convertValue(this.to);
             this.info.setMeasureUnit(unit);
         } catch(Exception e) {
             System.out.println(e.getMessage());
@@ -33,8 +37,9 @@ public class MeasureSystem implements IMeasureSystem {
         return this.info.isSameType(measureSystem.info);
     }
 
-    public boolean equals(MeasureSystem toCheck){
-        return this.info.isSameIdNumber(toCheck.info);
+    @Override
+    public boolean isSameIdNumber(MeasureSystem measureSystem){
+        return this.info.isSameIdNumber(measureSystem.info);
     }
 
     @Override

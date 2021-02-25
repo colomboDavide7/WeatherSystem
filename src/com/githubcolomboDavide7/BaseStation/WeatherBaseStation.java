@@ -32,7 +32,7 @@ public class WeatherBaseStation {
 
     private boolean alreadyExistSpecificMeasureSystem(IMeasureSystem toCheck){
         for(IMeasureSystem ms : this.measureSystems)
-            if(ms.equals(toCheck))
+            if(ms.isSameIdNumber((MeasureSystem) toCheck))
                 return true;
             return false;
     }
