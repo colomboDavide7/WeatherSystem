@@ -6,6 +6,6 @@ public interface IMeasureSystem {
 
     void changeUnit(MeasureUnit unit);
 
-    boolean isSystemOfSameType(MeasureSystem measureSystem);
+    boolean isSameType(MeasureSystem measureSystem);
 
 }

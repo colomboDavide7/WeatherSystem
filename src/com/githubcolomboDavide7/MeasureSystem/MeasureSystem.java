@@ -2,12 +2,16 @@ package com.githubcolomboDavide7.MeasureSystem;
 
 public class MeasureSystem implements IMeasureSystem {
 
+    private static int ID = 0;
+
     private final MeasureSystemType type;
+    private final int idNumber;
     private int from;
     private int to;
 
     public MeasureSystem(MeasureSystemType type, int from, int to){
         this.type = type;
+        this.idNumber = ID++;
         this.from = from;
         this.to = to;
     }
@@ -29,8 +33,12 @@ public class MeasureSystem implements IMeasureSystem {
     }
 
     @Override
-    public boolean isSystemOfSameType(MeasureSystem measureSystem) {
+    public boolean isSameType(MeasureSystem measureSystem) {
         return this.type.equals(measureSystem.type);
+    }
+
+    public boolean equals(MeasureSystem toCheck){
+        return this.idNumber == toCheck.idNumber;
     }
 
     @Override
