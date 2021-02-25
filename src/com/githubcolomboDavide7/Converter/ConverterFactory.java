@@ -10,7 +10,7 @@ public class ConverterFactory {
         else if(from == MeasureUnit.Fahrenheit && to == MeasureUnit.Celsius)
             return new FromFahrenheitToCelsius();
         else
-            throw new Exception();
+            throw new Exception("Wrong conversion from " + from + " to " + to + "\n");
     }
 
 }

@@ -1,7 +1,6 @@
 package com.githubcolomboDavide7.MeasureSystem;
 
-import com.githubcolomboDavide7.Converter.ConverterFactory;
-import com.githubcolomboDavide7.Converter.IConverter;
+import com.githubcolomboDavide7.Converter.*;
 
 public class MeasureSystem implements IMeasureSystem {
 
@@ -28,9 +27,7 @@ public class MeasureSystem implements IMeasureSystem {
     }
 
     @Override
-    public double getValue(){
-        return from + (to - from)*Math.random();
-    }
+    public double getValue() { return from + (to - from)*Math.random(); }
 
     @Override
     public boolean isSameType(MeasureSystem measureSystem) {
