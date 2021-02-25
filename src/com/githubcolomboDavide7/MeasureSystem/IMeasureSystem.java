@@ -6,4 +6,6 @@ public interface IMeasureSystem {
 
     void changeUnit(MeasureUnit unit);
 
+    boolean isCompatibleUnit(MeasureSystem measureSystem);
+
 }

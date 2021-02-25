@@ -24,6 +24,11 @@ public class MeasureSystem implements IMeasureSystem {
     }
 
     @Override
+    public boolean isCompatibleUnit(MeasureSystem measureSystem) {
+        return MeasureUnit.areCompatible(this.selectedUnit, measureSystem.selectedUnit);
+    }
+
+    @Override
     public double getValue(){
         return from + (to - from)*Math.random();
     }
