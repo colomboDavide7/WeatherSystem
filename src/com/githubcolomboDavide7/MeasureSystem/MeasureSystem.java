@@ -33,6 +33,12 @@ public class MeasureSystem implements IMeasureSystem {
         return from + (to - from)*Math.random();
     }
 
+    @Override
+    public String toString(){
+        return "MEASURE_UNIT = " + this.selectedUnit + "\t" +
+                "Value range goes from " + this.from + " to " + this.to;
+    }
+
 // ==========================================================================================
     // These methods are called for testing
     public boolean isMeasureUnitEqual(MeasureUnit unit) {

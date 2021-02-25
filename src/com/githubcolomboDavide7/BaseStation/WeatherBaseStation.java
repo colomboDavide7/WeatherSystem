@@ -24,8 +24,19 @@ public class WeatherBaseStation {
             return false;
     }
 
+    public void removeMeasureSystem(int index){
+        this.measureSystems.remove(index);
+    }
+
     public boolean isNumberOfMeasureSystemEqualTo(int size){
         return this.measureSystems.size() == size;
+    }
+
+    public String printActiveMeasureSystems(){
+        StringBuilder sb = new StringBuilder();
+        for(IMeasureSystem ms : this.measureSystems)
+            sb.append(ms.toString()).append("\n");
+        return sb.toString();
     }
 
 }
