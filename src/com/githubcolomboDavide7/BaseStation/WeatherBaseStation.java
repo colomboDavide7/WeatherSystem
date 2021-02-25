@@ -1,11 +1,9 @@
 package com.githubcolomboDavide7.BaseStation;
 
 import com.githubcolomboDavide7.MeasureSystem.*;
-import com.githubcolomboDavide7.Printer.WBSPrinter;
-
 import java.util.*;
 
-public class WeatherBaseStation {
+public class WeatherBaseStation implements IWeatherBaseStation {
 
     private final List<IMeasureSystem> measureSystems;
 
@@ -13,6 +11,7 @@ public class WeatherBaseStation {
         this.measureSystems = new ArrayList<>();
     }
 
+    @Override
     public void addMeasureSystem(IMeasureSystem ms) throws Exception {
         if(alreadyExistsCompatibleMeasureSystem(ms))
             throw new Exception("");
@@ -26,10 +25,16 @@ public class WeatherBaseStation {
         return false;
     }
 
+    @Override
     public void removeMeasureSystem(IMeasureSystem toRemove) throws Exception {
         if(!alreadyExistSpecificMeasureSystem(toRemove))
             throw new Exception("");
         this.measureSystems.removeIf(ms -> ms.isSameType((MeasureSystem) toRemove));
+    }
+
+    @Override
+    public Iterator<IMeasureSystem> getMeasureSystemIterator() {
+        return this.measureSystems.iterator();
     }
 
     private boolean alreadyExistSpecificMeasureSystem(IMeasureSystem toCheck){
@@ -41,10 +46,6 @@ public class WeatherBaseStation {
 
     public boolean isNumberOfMeasureSystemEqualTo(int size){
         return this.measureSystems.size() == size;
-    }
-
-    public String printActiveMeasureSystems(){
-        return WBSPrinter.printActiveMeasureSystems(this.measureSystems);
     }
 
 }
