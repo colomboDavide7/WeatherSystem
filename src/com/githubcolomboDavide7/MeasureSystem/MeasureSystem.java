@@ -2,16 +2,12 @@ package com.githubcolomboDavide7.MeasureSystem;
 
 public class MeasureSystem implements IMeasureSystem {
 
-    private static int ID = 0;
-
-    private final MeasureSystemType type;
-    private final int idNumber;
+    private final MeasureSystemInfo info;
     private int from;
     private int to;
 
     public MeasureSystem(MeasureSystemType type, int from, int to){
-        this.type = type;
-        this.idNumber = ID++;
+        info = new MeasureSystemInfo(type);
         this.from = from;
         this.to = to;
     }
@@ -19,9 +15,9 @@ public class MeasureSystem implements IMeasureSystem {
     @Override
     public void changeUnit(MeasureUnit unit){
         try {
-            this.from = (int) Converter.convertValue(this.type.defaultUnit, unit, this.from);
-            this.to   = (int) Converter.convertValue(this.type.defaultUnit, unit, this.to);
-            this.type.defaultUnit = unit;
+            this.from = (int) Converter.convertValue(this.info.getSelectedMeasureUnit(), unit, this.from);
+            this.to   = (int) Converter.convertValue(this.info.getSelectedMeasureUnit(), unit, this.to);
+            this.info.setMeasureUnit(unit);
         } catch(Exception e) {
             System.out.println(e.getMessage());
         }
@@ -34,24 +30,23 @@ public class MeasureSystem implements IMeasureSystem {
 
     @Override
     public boolean isSameType(MeasureSystem measureSystem) {
-        return this.type.equals(measureSystem.type);
+        return this.info.isSameType(measureSystem.info);
     }
 
     public boolean equals(MeasureSystem toCheck){
-        return this.idNumber == toCheck.idNumber;
+        return this.info.isSameIdNumber(toCheck.info);
     }
 
     @Override
     public String toString(){
-        return "SYSTEM TYPE = " + this.type + "\t" +
-                "MEASURE_UNIT = " + this.type.defaultUnit + "\t" +
+        return this.info.toString() +
                 "RANGE = " + this.from + " : " + this.to;
     }
 
 // ==========================================================================================
     // These methods are called for testing
     public boolean isMeasureUnitEqual(MeasureUnit unit) {
-        return this.type.defaultUnit.equals(unit);
+        return this.info.getSelectedMeasureUnit().equals(unit);
     }
 
 }

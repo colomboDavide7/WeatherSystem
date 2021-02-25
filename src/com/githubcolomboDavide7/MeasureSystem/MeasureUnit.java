@@ -4,6 +4,6 @@ public enum MeasureUnit {
 
     Celsius, Fahrenheit,
     Pascal,  mmHg,
-    microg_per_m3;
+    µg_m3;
 
 }
