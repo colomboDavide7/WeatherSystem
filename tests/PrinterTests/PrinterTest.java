@@ -1,6 +1,7 @@
 package PrinterTests;
 
 import com.githubcolomboDavide7.BaseStation.*;
+import com.githubcolomboDavide7.IOInterfaces.Printer;
 import com.githubcolomboDavide7.MeasureSystem.*;
 
 import org.junit.Assert;
@@ -16,7 +17,7 @@ public class PrinterTest {
         wbs.addMeasureSystem(ms1);
         wbs.addMeasureSystem(ms2);
         // Actual value
-        String actual = ((IWBSPrinter) wbs).printActiveMeasureSystems();
+        String actual = Printer.printActiveMeasureSystems((IWBSInputOutput) wbs);
 
         // Expected value
         StringBuilder sb = new StringBuilder();

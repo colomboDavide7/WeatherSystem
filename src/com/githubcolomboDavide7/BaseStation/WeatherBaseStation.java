@@ -3,7 +3,7 @@ package com.githubcolomboDavide7.BaseStation;
 import com.githubcolomboDavide7.MeasureSystem.*;
 import java.util.*;
 
-public class WeatherBaseStation implements IWBSManager, IWBSPrinter {
+public class WeatherBaseStation implements IWBSManager, IWBSInputOutput {
 
     private final List<IMeasureSystem> measureSystems;
 
@@ -40,8 +40,8 @@ public class WeatherBaseStation implements IWBSManager, IWBSPrinter {
     }
 
     @Override
-    public String printActiveMeasureSystems() {
-        return Printer.printActiveMeasureSystems(this.measureSystems.iterator());
+    public Iterator<IMeasureSystem> getMeasureSystemIterator() {
+        return this.measureSystems.iterator();
     }
 
     public boolean isNumberOfMeasureSystemEqualTo(int size){
