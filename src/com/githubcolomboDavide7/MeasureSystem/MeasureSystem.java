@@ -1,8 +1,6 @@
 package com.githubcolomboDavide7.MeasureSystem;
 
-import com.githubcolomboDavide7.Converter.*;
-
-public class MeasureSystem implements IMeasureSystem {
+public class MeasureSystem implements IMeasureSystem, IMSConfig {
 
     private final MeasureSystemInfo info;
     private int from;
@@ -15,20 +13,40 @@ public class MeasureSystem implements IMeasureSystem {
     }
 
     @Override
-    public void changeUnit(MeasureUnit unit){
-        try {
-            IConverter myConverter = ConverterFactory.getConverter(this.info.getSelectedMeasureUnit(), unit);
-            this.from = (int) myConverter.convertValue(this.from);
-            this.to   = (int) myConverter.convertValue(this.to);
-            this.info.setMeasureUnit(unit);
-        } catch(Exception e) {
-            System.out.println(e.getMessage());
-        }
+    public double getValue() { return from + (to - from)*Math.random(); }
+
+// ==========================================================================================
+    @Override
+    public int getFromValue() {
+        return this.from;
     }
 
     @Override
-    public double getValue() { return from + (to - from)*Math.random(); }
+    public void setFromValue(int from) {
+        this.from = from;
+    }
 
+    @Override
+    public int getToValue() {
+        return this.to;
+    }
+
+    @Override
+    public void setToValue(int to) {
+        this.to = to;
+    }
+
+    @Override
+    public MeasureUnit getUnit() {
+        return this.info.getSelectedMeasureUnit();
+    }
+
+    @Override
+    public void setUnit(MeasureUnit unit) {
+        this.info.setMeasureUnit(unit);
+    }
+
+// ==========================================================================================
     @Override
     public boolean isSameType(MeasureSystem measureSystem) {
         return this.info.isSameType(measureSystem.info);
@@ -43,12 +61,6 @@ public class MeasureSystem implements IMeasureSystem {
     public String toString(){
         return this.info.toString() +
                 "RANGE = " + this.from + " : " + this.to;
-    }
-
-// ==========================================================================================
-    // These methods are called for testing
-    public boolean isMeasureUnitEqual(MeasureUnit unit) {
-        return this.info.getSelectedMeasureUnit().equals(unit);
     }
 
 }

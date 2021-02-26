@@ -1,7 +1,6 @@
 package BaseStationTests;
 
 import com.githubcolomboDavide7.BaseStation.*;
-import com.githubcolomboDavide7.IOInterfaces.Printer;
 import com.githubcolomboDavide7.MeasureSystem.*;
 import org.junit.Assert;
 import org.junit.Before;

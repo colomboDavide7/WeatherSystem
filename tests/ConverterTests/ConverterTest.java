@@ -1,6 +1,7 @@
 package ConverterTests;
 
 import com.githubcolomboDavide7.Converter.*;
+import com.githubcolomboDavide7.MeasureSystem.*;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -8,15 +9,18 @@ public class ConverterTest {
 
     @Test
     public void shouldTestConversion(){
+        IMSConfig ms = new MeasureSystem(MeasureSystemType.TEMPERATURE, 0, 55);
         IConverter fromCtoF = new FromCelsiusToFahrenheit();
-        Assert.assertTrue(32 == fromCtoF.convertValue(0));
-        Assert.assertTrue(131 == fromCtoF.convertValue(55));
-        Assert.assertTrue(428 == fromCtoF.convertValue(220));
+        fromCtoF.convertMeasureSystem(ms);
+        Assert.assertTrue(32 == ms.getFromValue());
+        Assert.assertTrue(131 == ms.getToValue());
+        Assert.assertTrue(MeasureUnit.Fahrenheit.equals(ms.getUnit()));
 
         IConverter fromFtoC = new FromFahrenheitToCelsius();
-        Assert.assertTrue(0 == fromFtoC.convertValue(32));
-        Assert.assertTrue(55 == fromFtoC.convertValue(131));
-        Assert.assertTrue(220 == fromFtoC.convertValue(428));
+        fromFtoC.convertMeasureSystem(ms);
+        Assert.assertTrue(0 == ms.getFromValue());
+        Assert.assertTrue(55 == ms.getToValue());
+        Assert.assertTrue(MeasureUnit.Celsius.equals(ms.getUnit()));
     }
 
 }

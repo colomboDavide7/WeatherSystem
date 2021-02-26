@@ -1,7 +1,9 @@
 package com.githubcolomboDavide7.Converter;
 
+import com.githubcolomboDavide7.MeasureSystem.IMSConfig;
+
 public interface IConverter {
 
-    double convertValue(double value);
+    void convertMeasureSystem(IMSConfig measureSystem);
 
 }

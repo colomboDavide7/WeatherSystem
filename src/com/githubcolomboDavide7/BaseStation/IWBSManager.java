@@ -8,6 +8,4 @@ public interface IWBSManager {
 
     void removeMeasureSystem(IMeasureSystem toRemove) throws Exception;
 
-    void changeUnit(IMeasureSystem ms, MeasureUnit unit);
-
 }

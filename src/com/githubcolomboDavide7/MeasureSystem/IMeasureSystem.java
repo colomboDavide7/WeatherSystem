@@ -4,8 +4,6 @@ public interface IMeasureSystem {
 
     double getValue();
 
-    void changeUnit(MeasureUnit unit);
-
     boolean isSameType(MeasureSystem measureSystem);
 
     boolean isSameIdNumber(MeasureSystem measureSystem);

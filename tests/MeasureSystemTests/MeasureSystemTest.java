@@ -6,6 +6,7 @@ import org.junit.Test;
 
 public class MeasureSystemTest {
 
+    /*
     @Test
     public void shouldTestChangeUnitMethod(){
         MeasureSystemType type = MeasureSystemType.TEMPERATURE;
@@ -18,5 +19,7 @@ public class MeasureSystemTest {
         sys.changeUnit(MeasureUnit.Pascal);
         Assert.assertTrue(sys.isMeasureUnitEqual(MeasureUnit.Fahrenheit));
     }
+
+     */
 
 }

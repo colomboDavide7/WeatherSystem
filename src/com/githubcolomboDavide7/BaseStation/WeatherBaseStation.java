@@ -32,13 +32,6 @@ public class WeatherBaseStation implements IWBSManager, IWBSInputOutput {
         this.measureSystems.removeIf(ms -> ms.isSameType((MeasureSystem) toRemove));
     }
 
-    @Override
-    public void changeUnit(IMeasureSystem ms, MeasureUnit unit) {
-        for(IMeasureSystem elem : this.measureSystems)
-            if(elem.isSameIdNumber((MeasureSystem) ms))
-                elem.changeUnit(unit);
-    }
-
     private boolean alreadyExistSpecificMeasureSystem(IMeasureSystem toCheck){
         for(IMeasureSystem ms : this.measureSystems)
             if(ms.isSameIdNumber((MeasureSystem) toCheck))
