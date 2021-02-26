@@ -3,7 +3,7 @@ package com.githubcolomboDavide7.BaseStation;
 import com.githubcolomboDavide7.MeasureSystem.*;
 import java.util.*;
 
-public class WeatherBaseStation implements IWeatherBaseStation {
+public class WeatherBaseStation implements IWBSManager, IWBSPrinter {
 
     private final List<IMeasureSystem> measureSystems;
 
@@ -32,16 +32,16 @@ public class WeatherBaseStation implements IWeatherBaseStation {
         this.measureSystems.removeIf(ms -> ms.isSameType((MeasureSystem) toRemove));
     }
 
-    @Override
-    public Iterator<IMeasureSystem> getMeasureSystemIterator() {
-        return this.measureSystems.iterator();
-    }
-
     private boolean alreadyExistSpecificMeasureSystem(IMeasureSystem toCheck){
         for(IMeasureSystem ms : this.measureSystems)
             if(ms.isSameIdNumber((MeasureSystem) toCheck))
                 return true;
             return false;
+    }
+
+    @Override
+    public String printActiveMeasureSystems() {
+        return Printer.printActiveMeasureSystems(this.measureSystems.iterator());
     }
 
     public boolean isNumberOfMeasureSystemEqualTo(int size){
