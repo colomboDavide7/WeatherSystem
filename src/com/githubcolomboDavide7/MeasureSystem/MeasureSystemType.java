@@ -6,7 +6,7 @@ public enum MeasureSystemType {
     POLLUTION(MeasureUnit.µg_m3),
     PRESSURE(MeasureUnit.mmHg);
 
-    public MeasureUnit defaultUnit;
+    protected MeasureUnit defaultUnit;
 
     MeasureSystemType(MeasureUnit unit){
         this.defaultUnit = unit;
