@@ -6,17 +6,20 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class CityTest {
 
     private ICityManager city;
-    private CityInfo info;
 
     @Before
     public void setUp(){
-        String name = "Pavia";
-        String region = "Lombardia";
-        String country = "Italia";
-        this.info = new CityInfo(name, region, country);
+        Map<CityInfoField, String> fields = new HashMap<>();
+        fields.put(CityInfoField.Name, "Pavia");
+        fields.put(CityInfoField.Region, "Lombardia");
+        fields.put(CityInfoField.Country, "Italia");
+        CityInfo info = new CityInfo(fields);
         this.city = new City(info);
     }
 
@@ -25,6 +28,15 @@ public class CityTest {
         IWBSManager wbs = new WeatherBaseStation();
         city.addWeatherBaseStation(wbs);
         Assert.assertTrue(city.isNumberOfWBSEqualToN(1));
+        System.out.println(city.toString());
+    }
+
+    @Test
+    public void shouldTestPutField(){
+        Assert.assertTrue(((ICityConfig) city).isSameField(CityInfoField.Name, "Pavia"));
+        ((ICityConfig) city).putField(CityInfoField.Name, "Milano");
+        Assert.assertTrue(((ICityConfig) city).isSameField(CityInfoField.Name, "Milano"));
+
     }
 
 }

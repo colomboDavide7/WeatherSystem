@@ -1,38 +1,29 @@
 package com.githubcolomboDavide7.City;
 
+import java.util.*;
+
 public class CityInfo {
 
-    private final String NAME_STRING = "CITY_NAME";
-    private final String REGION_STRING = "CITY_REGION";
-    private final String COUNTRY_STRING = "CITY_COUNTRY";
+    private final Map<CityInfoField, String> fields;
 
-    private final String cityName;
-    private final String cityRegion;
-    private final String cityCountry;
-
-    public CityInfo(String name, String region, String country){
-        this.cityName = name;
-        this.cityRegion = region;
-        this.cityCountry = country;
+    public CityInfo(Map<CityInfoField, String> fields){
+        this.fields = fields;
     }
 
-    protected boolean isSameCityName(String name){
-        return name.equals(this.cityName);
+    protected void putField(CityInfoField key, String value){
+        this.fields.put(key, value);
     }
 
-    protected boolean isSameRegion(String region){
-        return region.equals(this.cityRegion);
-    }
-
-    protected boolean isSameCountry(String country){
-        return country.equals(this.cityCountry);
+    protected boolean isSameField(CityInfoField toCompare, String value){
+        return value.equals(this.fields.get(toCompare));
     }
 
     @Override
     public String toString(){
-        return this.NAME_STRING + " = " + this.cityName + "\t" +
-                this.REGION_STRING + " = " + this.cityRegion + "\t" +
-                this.COUNTRY_STRING + " = " + this.cityCountry + "\t";
+        StringBuilder sb = new StringBuilder();
+        for(CityInfoField key : this.fields.keySet())
+            sb.append(key).append(" = ").append(fields.get(key)).append("\t");
+        return sb.toString();
     }
 
 }
